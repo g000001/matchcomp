@@ -1,0 +1,26 @@
+#+BEGIN_SRC
+;;;===============================================
+;;;          A naive pattern-match compiler
+;;;  Christian Queinnec   
+;;;  Ecole Polytechnique & INRIA - Rocquencourt
+;;;          queinnec@poly.polytechnique.fr
+;;;===============================================
+
+;;; Copyright (c) 1990 by Christian Queinnec. All rights reserved.
+;;; 22 July 90, version 2.13
+;;;===============================================================
+
+;;; This program is distributed in the hope that it will be useful.
+;;; Use and copying of this software and preparation of derivative works
+;;; based upon this software are permitted, so long as the following
+;;; conditions are met:
+;;;      o credit to the authors is acknowledged following current
+;;;        academic behaviour
+;;;      o no fees or compensation are charged for use, copies, or
+;;;        access to this software
+;;;      o this copyright notice is included intact.
+;;; This software is made available AS IS, and no warranty is made
+about 
+;;; the software or its performance. 
+#+END_SRC
+

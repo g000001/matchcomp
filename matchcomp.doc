@@ -1,0 +1,77 @@
+;;; Copyright (c) 1990 by Christian Queinnec. All rights reserved.
+;;; 22 July 90, version 2.13
+;;;===============================================================
+
+;;; Some examples of compiled patterns:
+
+(match-all-lambda (??x ??x) 'OK)
+
+(lambda (G30) 
+  (letrec 
+    ((G32 
+      (lambda (G33) 
+        (or (letrec 
+              ((G34 (delay (set! x (cut G30 G33)))) 
+               (x 'wait)) 
+              (segment-check 
+               G33 G30 G33 
+                       (lambda (G35) 
+                         (and (equal? G35 '()) 
+                              (and (begin 
+                                    (force G34) 
+                                    (begin 'ok 
+                                           #F)) 
+                                   #F))))) 
+            (and (pair? G33) 
+                 (G32 (cdr G33))))))) 
+    (G32 G30)))
+
+
+(match-lambda (??- ?who loves ???-) who)
+
+(lambda (G46) 
+  (call/cc 
+   (lambda (G47) 
+     (letrec 
+       ((G49 (lambda (G50) 
+               (or (and (pair? G50) 
+                        (let ((who (car G50))) 
+                          (and (pair? (cdr G50)) 
+                               (and (equal? (car (cdr G50)) 
+                                            'loves) 
+                                    (and (begin (G47 (begin who))) 
+                                         #F))))) 
+                   (and (pair? G50) 
+                        (G49 (cdr G50))))))) 
+       (G49 G46)))))
+
+
+(match-all-lambda ((??- ?x ???-) (??- ?x ???-) ...) x)
+
+(lambda (G74) 
+  (and (pair? G74) 
+       (letrec 
+         ((G78 
+           (lambda (G79) 
+             (or 
+              (and (pair? G79) 
+                   (let ((x (car G79))) 
+                     (letrec 
+                       ((G80 
+                         (lambda (G81) 
+                           (or (and (equal? G81 '()) 
+                                    (and (begin (begin x #F)) 
+                                         #F)) 
+                               (and (pair? G81) 
+                                    (letrec 
+                                      ((G82 (lambda (G83) 
+                                              (or (and (pair? G83)
+                                                       (and (equal? x (car G83)) 
+                                                            (G80 (cdr G81)))) 
+                                                  (and (pair? G83)
+                                                       (G82 (cdr G83))))))) 
+                                      (G82 (car G81)))))))) 
+                       (G80 (cdr G74))))) 
+              (and (pair? G79) 
+                   (G78 (cdr G79))))))) 
+         (G78 (car G74)))))
